@@ -13,6 +13,7 @@ import numpy as np
 from art.attacks import FastGradientMethod
 from art.attacks import DeepFool
 from art.attacks import SaliencyMapMethod
+from art.attacks import ProjectedGradientDescent
 from art.classifiers import PyTorchClassifier
 from art.utils import load_mnist
 
@@ -93,7 +94,7 @@ print('Accuracy on clean model with fgsm test examples: {}%'.format(accuracy * 1
 
 # Step 7: Train clean model with perturbed images
 
-print("Training with adversarial example...")
+print("\nTraining with adversarial example..\n")
 classifier.fit(x_train_adv, y_train, batch_size=64, nb_epochs=30)
 
 # Step 8: Evaluate the new ART classifier on benign test examples
@@ -107,7 +108,7 @@ print('Accuracy on benign test examples: {}%'.format(accuracy * 100))
 
 predictions = classifier.predict(x_test_adv)
 accuracy = np.sum(np.argmax(predictions, axis=1) == np.argmax(y_test, axis=1)) / len(y_test)
-print('Accuracy on new model with fgsm test examples: {}%'.format(accuracy * 100))
+print('Accuracy on new model with fgsm test examples: {}%\n'.format(accuracy * 100))
 
 # Step 10: Save trained model
 
